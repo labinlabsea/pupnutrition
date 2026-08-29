@@ -3,58 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PupNutrition — 為毛孩打造的鮮食營養夥伴</title>
-<meta name="description" content="PupNutrition 幫助飼主規劃安全、營養均衡的狗狗鮮食食譜。">
+<meta name="theme-color" content="#0B0C0F">
+<title>PupNutrition — 為狗狗打造的鮮食營養夥伴</title>
+<meta name="description" content="PupNutrition 依體重與活動量算出狗狗每日所需,175 種食材、54 項營養素,每份鮮食食譜都幫你檢查達標與過量。PupNutrition calculates your dog's daily needs and checks every homemade recipe against 54 nutrients.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas class="starfield" aria-hidden="true"></canvas>
 
 <header class="site-header">
-  <a class="brand" href="index.html"><span class="paw">🐾</span> PupNutrition</a>
-  <nav class="site-nav">
-    <a href="index.html" class="active">首頁</a>
-    <a href="support.html">支援</a>
-    <a href="privacy.html">隱私權政策</a>
-    <a href="terms.html">使用者條款</a>
-  </nav>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="paw-row">🐾 🐾 🐾</div>
-    <h1>把每一餐,吃得剛剛好</h1>
-    <p class="tagline">PupNutrition 陪你規劃狗狗的鮮食食譜,依體重、年齡與活動量計算營養攝取,讓每一口都吃得安心。</p>
-  </section>
-
-  <div class="feature-grid">
-    <div class="feature">
-      <span class="icon">🥩</span>
-      <h3>營養試算</h3>
-      <p>依照狗狗的基本資料,估算每日所需熱量與營養素比例。</p>
-    </div>
-    <div class="feature">
-      <span class="icon">📋</span>
-      <h3>食譜管理</h3>
-      <p>建立、收藏並調整專屬鮮食食譜,追蹤食材份量。</p>
-    </div>
-    <div class="feature">
-      <span class="icon">🐶</span>
-      <h3>毛孩檔案</h3>
-      <p>記錄每隻毛孩的品種、體重與飲食偏好,一站掌握。</p>
+  <a class="brand" href="index.html"><img src="logo.png" alt="PupNutrition" class="brand-logo"> PupNutrition</a>
+  <div class="site-header-right">
+    <nav class="site-nav">
+      <a href="index.html" class="active" data-i18n="nav.home">首頁</a>
+      <a href="support.html" data-i18n="nav.support">支援</a>
+      <a href="privacy.html" data-i18n="nav.privacy">隱私權政策</a>
+      <a href="terms.html" data-i18n="nav.terms">使用者條款</a>
+    </nav>
+    <div class="lang-toggle">
+      <button type="button" data-lang-btn="zh-TW">中</button>
+      <button type="button" data-lang-btn="en-US">EN</button>
     </div>
   </div>
+</header>
 
-  <div class="card">
-    <h2 style="border-top:none; padding-top:0; margin-top:0;">關於 PupNutrition</h2>
-    <p>PupNutrition 是一款專為飼主設計的狗狗鮮食營養規劃工具,目標是讓自製鮮食也能兼顧安全與均衡。App 目前提供 iOS 版本,更多功能陸續推出中。</p>
-    <p>需要協助或有任何建議,歡迎前往<a href="support.html">支援頁面</a>與我們聯絡。</p>
+<main class="wide">
+  <section class="hero">
+    <img src="logo.png" alt="PupNutrition" class="hero-logo">
+    <h1 data-i18n="index.hero.title">把每一餐,吃得剛剛好</h1>
+    <p class="tagline" data-i18n="index.hero.tagline">PupNutrition 陪你規劃狗狗的鮮食食譜,依體重、年齡與活動量計算營養攝取,讓每一口都吃得安心。</p>
+
+    <div class="store-buttons">
+      <a href="#" class="store-btn">
+        <i class="fa-brands fa-apple"></i>
+        <span class="store-btn-text"><small data-i18n="index.store.apple.caption">下載</small><strong>App Store</strong></span>
+      </a>
+      <a href="#" class="store-btn">
+        <i class="fa-brands fa-google-play"></i>
+        <span class="store-btn-text"><small data-i18n="index.store.google.caption">下載</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+  </section>
+
+
+  <div class="section-heading">
+    <h2 data-i18n="index.features.heading">從備餐到追蹤,一套做完</h2>
+    <p class="section-sub" data-i18n="index.features.subheading">算好份量、記錄每一餐,再用數據回頭檢查吃得對不對。</p>
+  </div>
+
+  <section class="showcase">
+    <div class="showcase-item reveal">
+      <div class="showcase-text">
+        <span class="showcase-num">01</span>
+        <h2 data-i18n="index.showcase.01.title">一眼看完今天要顧的事</h2>
+        <p data-i18n="index.showcase.01.body">每日建議熱量、飲水量、體重趨勢與今天的日記,打開就在同一頁。家裡有幾隻就建幾隻,點頭像直接切換。</p>
+      </div>
+      <div class="showcase-frame">
+        <img src="images/shot-home.png" alt="PupNutrition 主頁畫面截圖" loading="lazy">
+      </div>
+    </div>
+
+    <div class="showcase-item showcase-item--reverse reveal">
+      <div class="showcase-text">
+        <span class="showcase-num">02</span>
+        <h2 data-i18n="index.showcase.02.title">不會配?從範本開始</h2>
+        <p data-i18n="index.showcase.02.body">全雞基礎、低脂腸胃、牛肉高蛋白等現成配方,依 NRC 2006 成犬維持期標準設計。選好狗狗,系統會按牠的每日熱量需求自動換算每樣食材要幾克。</p>
+      </div>
+      <div class="showcase-frame">
+        <img src="images/shot-templates.png" alt="PupNutrition 食譜範本畫面截圖" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="longshot" id="longshot">
+    <div class="longshot-inner">
+      <div class="longshot-text">
+        <span class="showcase-num">03</span>
+        <h2 data-i18n="index.longshot.title">這餐到底夠不夠?報告說了算</h2>
+        <p data-i18n="index.longshot.body">每份食譜都會逐項比對 54 種營養素,標出達標、不足、還是超過安全上限,連鈣磷比與 Omega 6:3 都幫你算好。這是一份報告的完整長度——不用再自己開試算表。</p>
+        <p class="longshot-hint" data-i18n="index.longshot.hint">往下捲,看完整份報告</p>
+      </div>
+      <div class="longshot-progress" aria-hidden="true"><span></span></div>
+      <div class="longshot-frame">
+        <img src="images/shot-recipe-long.jpg" alt="PupNutrition 完整食譜與營養檢核報告畫面截圖" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+
+    <div class="showcase-item showcase-item--reverse reveal">
+      <div class="showcase-text">
+        <span class="showcase-num">04</span>
+        <h2 data-i18n="index.showcase.04.title">每個數字都查得到出處</h2>
+        <p data-i18n="index.showcase.04.body">175 種食材,熱量、含水量到微量元素一應俱全,並標明食用安全性與資料來源。哪些是實測值、哪些是推估值,備註都寫得清清楚楚。</p>
+      </div>
+      <div class="showcase-frame">
+        <img src="images/shot-ingredient.png" alt="PupNutrition 食材詳情畫面截圖" loading="lazy">
+      </div>
+    </div>
+
+    <div class="showcase-item reveal">
+      <div class="showcase-text">
+        <span class="showcase-num">05</span>
+        <h2 data-i18n="index.showcase.05.title">每天花十秒,記一下</h2>
+        <p data-i18n="index.showcase.05.body">吃了哪一餐、食慾好不好、便便幾分、精神如何,大多是點選就好,不用打字。體重想記再記,不會逼你天天量。</p>
+      </div>
+      <div class="showcase-frame">
+        <img src="images/shot-log.png" alt="PupNutrition 日記畫面截圖" loading="lazy">
+      </div>
+    </div>
+
+    <div class="showcase-item showcase-item--reverse reveal">
+      <div class="showcase-text">
+        <span class="showcase-num">06</span>
+        <h2 data-i18n="index.showcase.06.title">身體的變化,數字先告訴你</h2>
+        <p data-i18n="index.showcase.06.body">餵食次數、便便評分、體重曲線自動整理成報告。連續幾次偏軟,App 會告訴你可能是換食太快或脂肪偏高,而不只是丟一張圖表給你。</p>
+      </div>
+      <div class="showcase-frame">
+        <img src="images/shot-report.png" alt="PupNutrition 日誌報告畫面截圖" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <span class="eyebrow" data-i18n="compare.eyebrow">方案比較</span>
+    <h2 data-i18n="compare.title">免費版 vs Pro</h2>
+    <p class="section-sub" data-i18n="compare.subtitle">核心功能免費版都有。升級 Pro 解除數量限制,並看得到更長期的趨勢。</p>
+  </div>
+
+  <div class="compare-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th data-i18n="compare.col.feature">功能</th>
+          <th data-i18n="compare.col.free">免費版</th>
+          <th>Pro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="compare.row.dogs">狗狗檔案</td>
+          <td data-i18n="compare.row.dogs.free">1 隻</td>
+          <td data-i18n="compare.row.dogs.pro">無限</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.recipes">食譜</td>
+          <td data-i18n="compare.row.recipes.free">2 份</td>
+          <td data-i18n="compare.row.recipes.pro">無限</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.report">日誌報告</td>
+          <td data-i18n="compare.row.report.free">過去 7 天</td>
+          <td data-i18n="compare.row.report.pro">完整(最長 1 年)</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.insight">智慧觀察與食譜關聯</td>
+          <td data-i18n="compare.row.insight.free">過去 7 天</td>
+          <td data-i18n="compare.row.insight.pro">完整功能</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.noads">無廣告</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.backup">本地備份</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.log">日誌功能</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td data-i18n="compare.row.weight">體重追蹤</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="about-section">
+    <h2 data-i18n="index.about.title">關於 PupNutrition</h2>
+    <p data-i18n="index.about.body1">自製鮮食最難的不是煮,是不確定有沒有煮對。PupNutrition 把這件事變得看得見:食材數據取自美國 USDA、台灣食藥署、日本文部科學省等六國官方成分表,每日需求量依 NRC 犬貓營養標準計算,每份食譜都會列出哪些營養素達標、哪些不足、哪些超過安全上限。</p>
+    <p data-i18n="index.about.body15">App 提供 iOS 與 Android 版本。它幫你把數字算清楚,但不能取代獸醫;狗狗有特殊健康狀況時,請先諮詢專業意見。</p>
+    <p data-i18n-html="index.about.body2.html">需要協助或有任何建議,歡迎前往<a href="support.html">支援頁面</a>與我們聯絡。</p>
   </div>
 </main>
 
 <footer>
-  <div class="paw-row">🐾 🐾 🐾 🐾 🐾</div>
+  <img src="logo.png" alt="PupNutrition" class="footer-logo">
+  <p class="footer-brand">PupNutrition</p>
+  <p data-i18n="footer.disclaimer.generic">本網站內容如中英文版本有歧義,概以中文版本為準。</p>
   <p>&copy; 2026 PupNutrition. All rights reserved.</p>
 </footer>
 
+<script src="js/starfield.js"></script>
+<script src="i18n/zh-TW.js"></script>
+<script src="i18n/en-US.js"></script>
+<script src="i18n/i18n.js"></script>
+<script>
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || !items.length) {
+      items.forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
+    items.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // 長截圖：把頁面捲動進度換算成圖片在手機框裡的位移
+  (function () {
+    var section = document.getElementById('longshot');
+    if (!section) return;
+    var frame = section.querySelector('.longshot-frame');
+    var img = frame && frame.querySelector('img');
+    var bar = section.querySelector('.longshot-progress span');
+    if (!img) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var maxShift = 0, ticking = false;
+
+    function measure() {
+      // 圖片實際渲染高度扣掉視窗高度，就是可以捲動的距離
+      maxShift = Math.max(0, img.offsetHeight - frame.clientHeight);
+    }
+
+    function update() {
+      ticking = false;
+      var rect = section.getBoundingClientRect();
+      var runway = section.offsetHeight - window.innerHeight;
+      if (runway <= 0) return;
+      var progress = Math.min(1, Math.max(0, -rect.top / runway));
+      img.style.transform = 'translateY(' + (-progress * maxShift).toFixed(1) + 'px)';
+      if (bar) bar.style.height = (progress * 100).toFixed(1) + '%';
+    }
+
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+
+    function init() { measure(); update(); }
+
+    if (img.complete) init(); else img.addEventListener('load', init);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { measure(); update(); });
+  })();
+</script>
 </body>
 </html>
