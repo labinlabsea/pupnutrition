@@ -21,6 +21,7 @@
 .starfield {
   position: fixed;
   inset: 0;
+  z-index: -1;          /* 沒有這行的話，fixed 定位會讓星點畫在內容「上面」，截圖會蒙上一層白霧 */
   display: block;
   pointer-events: none;
 }
@@ -128,7 +129,7 @@ main {
 /* 首頁：容器放寬讓截圖有空間，但文字段落仍維持好讀的行寬 */
 main.wide { max-width: 1080px; }
 main.wide .hero .tagline,
-main.wide .section-heading .section-sub { max-width: 560px; }
+main.wide .section-heading .section-sub { max-width: 960px; }
 main.wide .about-section p { max-width: 760px; }
 main.wide .compare-wrap { max-width: 860px; margin-inline: auto; }
 
@@ -249,14 +250,15 @@ li { margin-bottom: 6px; }
 .showcase-text p { color: var(--ink-soft); margin: 0; font-size: clamp(1rem, 1.15vw, 1.08rem); }
 .showcase-frame {
   flex: 0 0 auto;
-  width: clamp(300px, 30vw, 400px);
+  /* 固定整數寬度：用 vw 會算出 382.2px 這種小數，瀏覽器得做次像素重新取樣，圖片就會糊。
+     來源圖 800px，這裡內容區剛好 400px（402 減去左右各 1px 邊框），正好 2 倍 */
+  width: 402px;
   border-radius: 30px;
-  overflow: hidden;
   border: 1px solid var(--line-strong);
   box-shadow: var(--shadow-card);
-  background: var(--paper);
 }
-.showcase-frame img { display: block; width: 100%; height: auto; }
+/* 圓角直接給圖片，不用 overflow: hidden —— 圓角裁切會讓瀏覽器另開合成層重新點陣化 */
+.showcase-frame img { display: block; width: 100%; height: auto; border-radius: 29px; }
 
 /* ── 長截圖：捲動時內容在手機框裡往上跑 ── */
 .longshot { position: relative; height: 320vh; margin: 0 0 40px; }
@@ -283,7 +285,8 @@ li { margin-bottom: 6px; }
 }
 .longshot-frame {
   flex: 0 0 auto;
-  width: clamp(300px, 30vw, 400px);
+  /* 同樣固定整數寬度；來源圖 760px，內容區 380px 正好 2 倍 */
+  width: 382px;
   height: min(780px, 80vh);
   overflow: hidden;
   border-radius: 30px;
@@ -315,7 +318,8 @@ li { margin-bottom: 6px; }
 }
 
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in-view { opacity: 1; transform: translateY(0); }
+/* 用 none 而非 translateY(0)：留著 transform 會讓元素持續待在 GPU 合成層，圖片與文字會被重新點陣化而變糊 */
+.reveal.in-view { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   /* 不做釘住捲動，改成使用者自己捲的一般容器 */
@@ -426,16 +430,22 @@ footer {
 }
 .footer-brand { font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--sage-deep); margin: 0 0 16px; }
 
+/* 空間不夠並排時改成上下堆疊，並讓截圖盡量撐滿寬度 */
+@media (max-width: 860px) {
+  .showcase-item, .showcase-item--reverse { flex-direction: column; gap: 28px; text-align: center; }
+  .showcase-frame { width: min(92vw, 402px); }
+  .longshot { height: 300vh; }
+  .longshot-inner { flex-direction: column; gap: 20px; justify-content: center; }
+  .longshot-text { flex: none; text-align: center; }
+  .longshot-frame { width: min(92vw, 382px); height: 54vh; }
+  .longshot-progress { display: none; }
+}
+
 @media (max-width: 640px) {
   .site-header { flex-direction: column; gap: 14px; text-align: center; }
   .site-header-right { flex-direction: column; gap: 10px; }
   .site-nav { flex-wrap: wrap; justify-content: center; }
   .card { padding: 26px 22px; }
-  .showcase-item, .showcase-item--reverse { flex-direction: column; gap: 28px; text-align: center; }
-  .showcase-frame { width: 240px; }
-  .longshot { height: 300vh; }
-  .longshot-inner { flex-direction: column; gap: 22px; justify-content: center; }
-  .longshot-text { flex: none; text-align: center; }
-  .longshot-frame { width: 240px; height: 56vh; }
-  .longshot-progress { display: none; }
+  main { padding-inline: 12px; }
+  .longshot-frame { height: 52vh; }
 }
