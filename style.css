@@ -398,6 +398,14 @@ li { margin-bottom: 6px; }
 .compare-table tbody tr { transition: background-color 0.2s ease; }
 .compare-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .compare-table .dash { color: var(--ink-soft); opacity: 0.5; }
+.compare-table .compare-note {
+  display: block;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.75;
+  margin-top: 2px;
+}
 
 .contact-box {
   background: rgba(240, 196, 109, 0.08);
