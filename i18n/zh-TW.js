@@ -46,6 +46,8 @@ window.PUPNUTRITION_I18N['zh-TW'] = {
   'compare.row.templates': '食譜範本',
   'compare.row.templates.free': '4 份',
   'compare.row.templates.pro': '完整',
+  'compare.row.nutritionSuggestions': '智慧配方調整建議',
+  'compare.row.batchPrep': '批次備餐與分裝',
   'compare.row.report': '日誌報告',
   'compare.row.report.free': '過去 7 天',
   'compare.row.report.pro.html': '完整<span class="compare-note">（最長 1 年）</span>',

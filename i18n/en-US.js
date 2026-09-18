@@ -46,6 +46,8 @@ window.PUPNUTRITION_I18N['en-US'] = {
   'compare.row.templates': 'Recipe Templates',
   'compare.row.templates.free': '4 templates',
   'compare.row.templates.pro': 'All templates',
+  'compare.row.nutritionSuggestions': 'Smart Recipe Adjustment Suggestions',
+  'compare.row.batchPrep': 'Batch Meal Prep & Portioning',
   'compare.row.report': 'Log Reports',
   'compare.row.report.free': 'Past 7 days',
   'compare.row.report.pro.html': 'Full history<span class="compare-note">(up to 1 year)</span>',
