@@ -34,6 +34,32 @@
       if (Object.prototype.hasOwnProperty.call(dict, key2)) el2.innerHTML = dict[key2];
     }
 
+    var contentNodes = document.querySelectorAll('[data-i18n-content]');
+    for (var l = 0; l < contentNodes.length; l++) {
+      var contentEl = contentNodes[l];
+      var contentKey = contentEl.getAttribute('data-i18n-content');
+      if (Object.prototype.hasOwnProperty.call(dict, contentKey)) {
+        contentEl.setAttribute('content', dict[contentKey]);
+      }
+    }
+
+    var altNodes = document.querySelectorAll('[data-i18n-alt]');
+    for (var m = 0; m < altNodes.length; m++) {
+      var altEl = altNodes[m];
+      var altKey = altEl.getAttribute('data-i18n-alt');
+      if (Object.prototype.hasOwnProperty.call(dict, altKey)) altEl.setAttribute('alt', dict[altKey]);
+    }
+
+    var imageNodes = document.querySelectorAll('[data-i18n-src]');
+    var imageSourceAttr = lang === 'en-US' ? 'data-src-en' : 'data-src-zh';
+    for (var n = 0; n < imageNodes.length; n++) {
+      var imageEl = imageNodes[n];
+      var localizedSrc = imageEl.getAttribute(imageSourceAttr);
+      if (localizedSrc && imageEl.getAttribute('src') !== localizedSrc) {
+        imageEl.setAttribute('src', localizedSrc);
+      }
+    }
+
     var buttons = document.querySelectorAll('[data-lang-btn]');
     for (var k = 0; k < buttons.length; k++) {
       var btn = buttons[k];
