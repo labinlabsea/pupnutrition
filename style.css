@@ -308,11 +308,11 @@ li { margin-bottom: 6px; }
   box-shadow: var(--shadow-card);
   background: var(--paper);
 }
+.longshot-stack { will-change: transform; }
 .longshot-frame img {
   display: block;
   width: 100%;
   height: auto;
-  will-change: transform;
 }
 /* 進度條 */
 .longshot-progress {
@@ -340,7 +340,7 @@ li { margin-bottom: 6px; }
   .longshot { height: auto; }
   .longshot-inner { position: static; height: auto; padding: 40px 0; }
   .longshot-frame { overflow-y: auto; }
-  .longshot-frame img { transform: none !important; }
+  .longshot-stack { transform: none !important; }
   .longshot-progress { display: none; }
 }
 
@@ -419,6 +419,11 @@ li { margin-bottom: 6px; }
   font-weight: 600;
   opacity: 0.75;
   margin-top: 2px;
+}
+.compare-footnote {
+  margin: 4px 12px 12px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
 }
 
 .contact-box {

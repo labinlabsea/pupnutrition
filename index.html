@@ -46,7 +46,7 @@
     </div>
 
     <figure class="hero-feature">
-      <img src="images/pawnouri-feature-graphic-en.png" alt="PawNouri 鮮食營養、飼料搭配與日誌功能主視覺" data-i18n-alt="alt.featureGraphic">
+      <img src="images/pawnouri-feature-graphic-en.webp" alt="PawNouri 鮮食營養、飼料搭配與日誌功能主視覺" data-i18n-alt="alt.featureGraphic">
     </figure>
   </section>
 
@@ -71,7 +71,7 @@
       <div class="showcase-text">
         <span class="showcase-num">02</span>
         <h2 data-i18n="index.showcase.templates.title">不會配？從範本開始</h2>
-        <p data-i18n="index.showcase.templates.body">雞肉內臟糙米餐、雞魚南瓜白米餐、牛肉櫛瓜藜麥餐等入門配方，依 App 採用的 NRC 2006 成犬維持期營養目標試算。選好狗狗，系統會按牠的每日熱量需求自動換算食材克數；營養報表尚未透過所需補充品補齊前，不應視為完整主食。</p>
+        <p data-i18n="index.showcase.templates.body">雞肉內臟糙米餐、雞魚南瓜白米餐、牛肉地瓜藜麥餐等入門配方，依 App 採用的 NRC 2006 成犬維持期營養目標試算。選好狗狗，系統會按牠的每日熱量需求自動換算食材克數；營養報表尚未透過所需補充品補齊前，不應視為完整主食。</p>
       </div>
       <div class="showcase-frame">
         <img src="images/shot-templates.jpg" data-i18n-src data-src-zh="images/shot-templates.jpg" data-src-en="images/en-us/shot-templates.jpg" alt="PawNouri 食譜範本畫面截圖" data-i18n-alt="alt.shot.templates" loading="lazy">
@@ -100,7 +100,11 @@
       </div>
       <div class="longshot-progress" aria-hidden="true"><span></span></div>
       <div class="longshot-frame">
-        <img src="images/shot-recipe-long.jpg" data-i18n-src data-src-zh="images/shot-recipe-long.jpg" data-src-en="images/en-us/shot-recipe-long.jpg" alt="PawNouri 完整食譜與營養檢核報告畫面截圖" data-i18n-alt="alt.shot.recipe" loading="lazy">
+        <!-- 長截圖超過 WebP 單張 16383px 高度上限，切成上下兩段疊放 -->
+        <div class="longshot-stack">
+          <img src="images/shot-recipe-long-1.webp" data-i18n-src data-src-zh="images/shot-recipe-long-1.webp" data-src-en="images/en-us/shot-recipe-long-1.webp" alt="PawNouri 完整食譜與營養檢核報告畫面截圖" data-i18n-alt="alt.shot.recipe" loading="lazy">
+          <img src="images/shot-recipe-long-2.webp" data-i18n-src data-src-zh="images/shot-recipe-long-2.webp" data-src-en="images/en-us/shot-recipe-long-2.webp" alt="" aria-hidden="true" loading="lazy">
+        </div>
       </div>
     </div>
   </section>
@@ -228,6 +232,11 @@
           <td>✓</td>
         </tr>
         <tr>
+          <td data-i18n="compare.row.offline">離線使用*</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
           <td data-i18n="compare.row.backup">本地備份</td>
           <td>✓</td>
           <td>✓</td>
@@ -299,6 +308,7 @@
         </tr>
       </tbody>
     </table>
+    <p class="compare-footnote" data-i18n="compare.offlineNote">*安裝或更新後第一次開啟需要連網，之後即可離線使用。</p>
   </div>
 
   <div class="about-section">
@@ -343,16 +353,17 @@
     var section = document.getElementById('longshot');
     if (!section) return;
     var frame = section.querySelector('.longshot-frame');
-    var img = frame && frame.querySelector('img');
+    var stack = frame && frame.querySelector('.longshot-stack');
+    var imgs = stack ? stack.querySelectorAll('img') : [];
     var bar = section.querySelector('.longshot-progress span');
-    if (!img) return;
+    if (!stack) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var maxShift = 0, ticking = false;
 
     function measure() {
       // 圖片實際渲染高度扣掉視窗高度，就是可以捲動的距離
-      maxShift = Math.max(0, img.offsetHeight - frame.clientHeight);
+      maxShift = Math.max(0, stack.offsetHeight - frame.clientHeight);
     }
 
     function update() {
@@ -361,7 +372,7 @@
       var runway = section.offsetHeight - window.innerHeight;
       if (runway <= 0) return;
       var progress = Math.min(1, Math.max(0, -rect.top / runway));
-      img.style.transform = 'translateY(' + (-progress * maxShift).toFixed(1) + 'px)';
+      stack.style.transform = 'translateY(' + (-progress * maxShift).toFixed(1) + 'px)';
       if (bar) bar.style.height = (progress * 100).toFixed(1) + '%';
     }
 
@@ -371,9 +382,11 @@
 
     function init() { measure(); update(); }
 
-    // 語言切換會換掉長截圖，因此每次新圖片載入後都要重新量測。
-    img.addEventListener('load', init);
-    if (img.complete) init();
+    // 語言切換會換掉長截圖，且上下兩段各自載入，因此每張圖載入後都要重新量測。
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].addEventListener('load', init);
+      if (imgs[i].complete) init();
+    }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', function () { measure(); update(); });
   })();
