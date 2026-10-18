@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
 :root {
   --bg: #0B0C0F;
@@ -38,6 +38,10 @@ body {
   font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+}
+/* 英文版內文改用 Inter：Noto Sans TC 會把 ’ “ ” — 畫成全形，像多了空格 */
+html:lang(en) body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif;
 }
 
 h1, h2, h3, .brand {
